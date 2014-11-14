@@ -7,21 +7,21 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Serialization;
 
-namespace SixPack {
-    public class SixPack {
+namespace SixPackCs {
+    public class Session {
         private const string validName = @"^[a-z0-9][a-z0-9\-_ ]*$";
         private readonly Guid clientId;
-        private readonly string baseUrl;
+        private readonly string baseUrl = "http://localhost:5000";
         private readonly string ipAddress;
         private readonly string userAgent;
-        private readonly int timeout = 10000;
+        private readonly int timeout = 500;
 
-        public SixPack(Guid? clientId = null, string baseUrl = null, int? timeout = null, string ipAddress = null,
+        public Session(Guid? clientId = null, string baseUrl = null, int? timeout = null, string ipAddress = null,
             string userAgent = null) {
             this.clientId = clientId ?? Guid.NewGuid();
             this.baseUrl = baseUrl ?? this.baseUrl;
-            this.ipAddress = ipAddress ?? this.ipAddress;
-            this.userAgent = userAgent ?? this.userAgent;
+            this.ipAddress = ipAddress;
+            this.userAgent = userAgent;
             this.timeout = timeout ?? this.timeout;
         }
 
