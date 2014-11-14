@@ -22,7 +22,7 @@ sixpack.Convert("experiment1", "kpi3", (ex, oo) => {
 
 Each session has a `clientId` associated with it that must be preseved across requests.
 
-Session optionally takes clientId, baseUrl, timeout, ipAddress and userAgent in the constructor.
+Session optionally takes `clientId`, `baseUrl`, `timeout`, `ipAddress` and `userAgent` in the constructor.
 
 ## What is Sixpack?
 
