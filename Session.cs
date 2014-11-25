@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Serialization;
 
-namespace SixPackCs {
+namespace SixpackAB {
     public class Session {
         private const string validName = @"^[a-z0-9][a-z0-9\-_ ]*$";
         private readonly Guid clientId;
@@ -16,6 +16,14 @@ namespace SixPackCs {
         private readonly string userAgent;
         private readonly int timeout = 500;
 
+        /// <summary>
+        /// Session constructor.
+        /// </summary>
+        /// <param name="clientId">The unique ID of the subject of your experiment (your user).</param>
+        /// <param name="baseUrl">The base URL to your Sixpack server.</param>
+        /// <param name="timeout">Timeout for the internal HTTP client used by the session.</param>
+        /// <param name="ipAddress">The IP address of the subject of your experiment.</param>
+        /// <param name="userAgent">The Useragent of the subject of your experiment.</param>
         public Session(Guid? clientId = null, string baseUrl = null, int? timeout = null, string ipAddress = null,
             string userAgent = null) {
             this.clientId = clientId ?? Guid.NewGuid();
@@ -25,6 +33,13 @@ namespace SixPackCs {
             this.timeout = timeout ?? this.timeout;
         }
 
+        /// <summary>
+        /// The client method to participate in an experiment.
+        /// </summary>
+        /// <param name="experimentName">The name of the experiment to participate in.</param>
+        /// <param name="alternatives">The alternatives for the experiment.</param>
+        /// <param name="force">Force an alternative, for testing purposes.</param>
+        /// <param name="callback">The callback that will handle the result of the method call or the exception that got thrown.</param>
         public void Participate(string experimentName, string[] alternatives, string force,
             Action<Exception, object> callback) {
                 if (!Regex.IsMatch(experimentName, validName))
@@ -61,6 +76,12 @@ namespace SixPackCs {
             }
         }
 
+        /// <summary>
+        /// The client method to register an conversion in an experiment.
+        /// </summary>
+        /// <param name="experimentName">The name of the experiment related to the conversion.</param>
+        /// <param name="kpi">Any arbitrary KPI you want to associate with the conversion.</param>
+        /// <param name="callback">The callback that will handle the result of the method call or the exception that got thrown.</param>
         public void Convert(string experimentName, string kpi, Action<Exception, object> callback) {
             if (!Regex.IsMatch(experimentName, validName))
             {
