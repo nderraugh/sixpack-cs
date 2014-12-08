@@ -72,7 +72,7 @@ namespace SixpackAB {
             else {
                 var parameters = GetParameters(experimentName);
                 parameters.Add("alternatives", alternatives);
-                Request(baseUrl + "/participate", parameters, 10000, callback);
+                Request(baseUrl + "/participate", parameters, timeout, callback);
             }
         }
 
